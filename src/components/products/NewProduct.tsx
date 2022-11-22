@@ -1,4 +1,14 @@
+import { useDispatch, useSelector } from "react-redux"
+import { createNewProduct } from "../../../store/actions"
+
 const NewProduct = () => {
+	const dispatch = useDispatch()
+
+	const onSubmitHandler = e => {
+		e.preventDefault()
+		dispatch(createNewProduct())
+	}
+
 	return (
 		<div className='row justify-content-center'>
 			<div className='col-md-8'>
@@ -6,7 +16,7 @@ const NewProduct = () => {
 					<div className='card-body'>
 						<h2 className='text-center mb-4 font-weight-bold'> Add new product</h2>
 
-						<form>
+						<form onSubmit={onSubmitHandler}>
 							<div className='form-group'>
 								<label>Product name</label>
 								<input type='text' placeholder='Name' name='name' className='form-control' />
