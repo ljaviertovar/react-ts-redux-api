@@ -1,0 +1,7 @@
+enum productTypes {
+	ADD_PRODUCT_SUCCESS = "ADD_PRODUCT_SUCCESS",
+	ADD_PRODUCT_ERROR = "ADD_PRODUCT_ERROR",
+	ADD_PRODUCT = "ADD_PRODUCT",
+}
+
+export default productTypes
