@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 
 import { useNavigate } from "react-router-dom"
 
-import { Product } from "../../../ts/interfaces/product.interface"
+import { Product } from "../../../interfaces/product.interface"
 
 import { ProductActions, State } from "../../../store"
 

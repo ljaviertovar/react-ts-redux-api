@@ -1,10 +1,12 @@
-import { Product } from "../../ts/interfaces/product.interface"
+import { Product } from "../../interfaces/product.interface"
 import ProductTypes from "../action-types/product-types"
 
 export type ProductsState = {
 	products: Product[]
 	error: boolean
 	loading: boolean
+	productDelete: number
+	productEdit?: Product
 }
 
 interface AddProduct {
@@ -22,6 +24,66 @@ interface AddProductError {
 	payload: boolean
 }
 
-export type ProductAction = AddProduct | AddProductSuccess | AddProductError
+interface StartGetProducts {
+	type: ProductTypes.GET_PRODUCTS
+	payload: boolean
+}
 
-export type DispatchType = (args: ProductAction) => ProductAction
+interface GetProductsSuccess {
+	type: ProductTypes.GET_PRODUCTS_SUCCESS
+	payload: Product[]
+}
+
+interface GetProductsError {
+	type: ProductTypes.GET_PRODUCTS_ERROR
+	payload: boolean
+}
+
+interface DeleteProduct {
+	type: ProductTypes.DELETE_PRODUCT
+	payload: number
+}
+
+interface DeleteProductSuccess {
+	type: ProductTypes.DELETE_PRODUCT_SUCCESS
+}
+
+interface DeleteProductError {
+	type: ProductTypes.DELETE_PRODUCT_ERROR
+	payload: boolean
+}
+
+interface deleteProduct {
+	type: ProductTypes.DELETE_PRODUCT
+	payload: number
+}
+
+interface EditProductSuccess {
+	type: ProductTypes.EDIT_PRODUCT_SUCCESS
+}
+
+interface EditProductError {
+	type: ProductTypes.EDIT_PRODUCT_ERROR
+	payload: boolean
+}
+
+interface EditProduct {
+	type: ProductTypes.EDIT_PRODUCT
+	payload: Product
+}
+
+export type ProductActions =
+	| AddProduct
+	| AddProductSuccess
+	| AddProductError
+	| StartGetProducts
+	| GetProductsSuccess
+	| GetProductsError
+	| DeleteProduct
+	| DeleteProductSuccess
+	| DeleteProductError
+	| EditProduct
+	| EditProductSuccess
+	| EditProductError
+
+export type DispatchType = (args: ProductActions) => ProductActions

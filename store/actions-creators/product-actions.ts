@@ -1,12 +1,13 @@
-import productTypes from "../action-types/product-types"
-
-import axiosClient from "../../config/axios"
-import { Product } from "../../ts/interfaces/product.interface"
 import { Dispatch } from "redux"
-import { ProductAction } from "../types/store"
+import axiosClient from "../../config/axios"
+
+import productTypes from "../action-types/product-types"
+import { Product } from "../../interfaces/product.interface"
+
+import { ProductActions } from "../types/store"
 
 export const createNewProduct = (product: Product) => {
-	return async (dispatch: Dispatch<ProductAction>) => {
+	return async (dispatch: Dispatch<ProductActions>) => {
 		dispatch({
 			type: productTypes.ADD_PRODUCT,
 			payload: true,
@@ -25,5 +26,58 @@ export const createNewProduct = (product: Product) => {
 				payload: true,
 			})
 		}
+	}
+}
+
+export const getProducts = () => {
+	return async (dispatch: Dispatch<ProductActions>) => {
+		dispatch({
+			type: productTypes.GET_PRODUCTS,
+			payload: true,
+		})
+
+		try {
+			const resp = await axiosClient.get("/products")
+			dispatch({
+				type: productTypes.GET_PRODUCTS_SUCCESS,
+				payload: resp.data,
+			})
+		} catch (error) {
+			dispatch({
+				type: productTypes.GET_PRODUCTS_ERROR,
+				payload: true,
+			})
+		}
+	}
+}
+
+export const deleteProduct = (id: number) => {
+	return async (dispatch: Dispatch<ProductActions>) => {
+		dispatch({
+			type: productTypes.DELETE_PRODUCT,
+			payload: id,
+		})
+
+		try {
+			await axiosClient.delete(`/products/${id}`)
+
+			dispatch({
+				type: productTypes.DELETE_PRODUCT_SUCCESS,
+			})
+		} catch (error) {
+			dispatch({
+				type: productTypes.DELETE_PRODUCT_ERROR,
+				payload: true,
+			})
+		}
+	}
+}
+
+export const editProduct = (product: Product) => {
+	return async (dispatch: Dispatch<ProductActions>) => {
+		dispatch({
+			type: productTypes.EDIT_PRODUCT,
+			payload: product,
+		})
 	}
 }
