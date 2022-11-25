@@ -34,7 +34,9 @@ const Products = () => {
 					<>
 						{products.length === 0 ? (
 							<tr>
-								<td>There is not products!</td>
+								<td colSpan={3} className='text-center'>
+									There is not products!
+								</td>
 							</tr>
 						) : (
 							products.map(p => <Product product={p} key={p.id} />)

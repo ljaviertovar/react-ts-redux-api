@@ -73,11 +73,29 @@ export const deleteProduct = (id: number) => {
 	}
 }
 
-export const editProduct = (product: Product) => {
+export const setEditProduct = (product: Product) => {
 	return async (dispatch: Dispatch<ProductActions>) => {
 		dispatch({
-			type: productTypes.EDIT_PRODUCT,
+			type: productTypes.SET_EDIT_PRODUCT,
 			payload: product,
 		})
+	}
+}
+
+export const editProduct = (product: Product) => {
+	return async (dispatch: Dispatch<ProductActions>) => {
+		try {
+			await axiosClient.put(`/products/${product.id}`, product)
+
+			dispatch({
+				type: productTypes.EDIT_PRODUCT_SUCCESS,
+				payload: product,
+			})
+		} catch (error) {
+			dispatch({
+				type: productTypes.EDIT_PRODUCT_ERROR,
+				payload: true,
+			})
+		}
 	}
 }

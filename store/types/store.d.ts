@@ -60,6 +60,7 @@ interface deleteProduct {
 
 interface EditProductSuccess {
 	type: ProductTypes.EDIT_PRODUCT_SUCCESS
+	payload: Product
 }
 
 interface EditProductError {
@@ -67,9 +68,14 @@ interface EditProductError {
 	payload: boolean
 }
 
+interface SetEditProduct {
+	type: ProductTypes.SET_EDIT_PRODUCT
+	payload: Product
+}
+
 interface EditProduct {
 	type: ProductTypes.EDIT_PRODUCT
-	payload: Product
+	payload: boolean
 }
 
 export type ProductActions =
@@ -82,6 +88,7 @@ export type ProductActions =
 	| DeleteProduct
 	| DeleteProductSuccess
 	| DeleteProductError
+	| SetEditProduct
 	| EditProduct
 	| EditProductSuccess
 	| EditProductError

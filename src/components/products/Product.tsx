@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { bindActionCreators } from "redux"
 
@@ -11,12 +11,12 @@ interface Props {
 
 const Product = ({ product }: Props) => {
 	const dispatch = useDispatch()
-	const { deleteProduct, editProduct } = bindActionCreators(ProductActions, dispatch)
+	const { deleteProduct, setEditProduct } = bindActionCreators(ProductActions, dispatch)
 
 	const navigate = useNavigate()
 
 	const handleClickEdit = () => {
-		editProduct(product)
+		setEditProduct(product)
 		navigate(`/products/edit/${product.id}`)
 	}
 

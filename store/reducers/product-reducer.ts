@@ -12,6 +12,7 @@ const initialState: ProductsState = {
 const reducer = (state: ProductsState = initialState, action: ProductActions): ProductsState => {
 	switch (action.type) {
 		case productTypes.ADD_PRODUCT:
+		case productTypes.EDIT_PRODUCT:
 		case productTypes.GET_PRODUCTS:
 			return {
 				...state,
@@ -55,10 +56,22 @@ const reducer = (state: ProductsState = initialState, action: ProductActions): P
 				productDelete: 0,
 				error: true,
 			}
-		case productTypes.EDIT_PRODUCT:
+		case productTypes.SET_EDIT_PRODUCT:
 			return {
 				...state,
 				productEdit: action.payload,
+			}
+		case productTypes.EDIT_PRODUCT_SUCCESS:
+			return {
+				...state,
+				productEdit: undefined,
+				products: state.products.map(p => (p.id === action.payload.id ? action.payload : p)),
+			}
+		case productTypes.EDIT_PRODUCT_ERROR:
+			return {
+				...state,
+				productEdit: undefined,
+				error: true,
 			}
 		default:
 			return state
